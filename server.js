@@ -8,8 +8,16 @@ const PORT = process.env.PORT || 8000;
 app.get("/ping", (req, res) => {
   res.send("PONGI");
 });
+const allowedOrigins = ["https://task-manager-frontend-sauy.vercel.app"];
+
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use("/api/auth", require("./routes/userRoutes"));
 app.use("/api/task", require("./routes/taskRoutes"));
 // app.use("/api/tasks", require("./routes/taskRoutes"));
